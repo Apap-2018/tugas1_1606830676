@@ -158,11 +158,6 @@ public class PegawaiController {
 		
 		
 		List<PegawaiModel> newAnotherPegawai = pegawaiService.findByTahunMasukAndInstansi(pegawaiBaru.getTahunMasuk(), instansiBaru);
-		/**
-		 * for(PegawaiModel p : anotherPegawai) {
-		 * System.out.println(p.getNama());
-		 * }
-		 */
 		if(newAnotherPegawai.isEmpty()) {
 			nipBaru += "01";
 		}
