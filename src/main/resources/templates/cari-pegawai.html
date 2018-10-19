@@ -27,13 +27,13 @@
 </head>
 
 <body>
-	<nav th:replace="fragments/fragment :: navbar (pageTitle='View Pilot')"></nav>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<div id="Content" class="container-full-bg">
 	<h1>Cari Pegawai</h1>
 	<form class="form-inline" th:action="@{/pegawai/tambah}" th:object="${pegawai}" method="POST">
 
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="provinsi">Provinsi</label>
+			<label class="control-label col-sm-2" for="provinsi">Provinsi:</label>
 			<div class="col-sm-10">
 				<select type="text" name="provinsi" id="provinsi">
 					<option th:each="provinsi: ${listOfProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}" name="provinsi"></option>
@@ -42,7 +42,7 @@
 		</div> 
 		
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="instansi">Instansi</label>
+			<label class="control-label col-sm-2" for="instansi">Instansi:</label>
     		<div class="col-sm-10">
 				<select type="text" name="instansi" id="instansi">
 					<option th:each="instansi: ${listOfInstansi}" th:value="${instansi.id}" th:prov="${instansi.provinsi.id}" th:text="${instansi.nama}" name="instansi"></option>
@@ -51,7 +51,7 @@
 		</div>
 		
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="jabatan">Jabatan</label>
+			<label class="control-label col-sm-2" for="jabatan">Jabatan:</label>
     		<div class="col-sm-10">
     			<select name="jabatan">
 					<option th:each="jabatan : ${listOfJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}" name="jabatan">

@@ -56,6 +56,11 @@ public class PegawaiController {
 		return "not-foundError";
 	}
 	
+	@RequestMapping(value = "/pegawai/termudaTertua", method = RequestMethod.GET)
+	private String findTermudaTertua(Model model) {
+		return "termudaTertua";
+	
+	}
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.GET)
 	private String add(Model model) {
 		model.addAttribute("pegawai", new PegawaiModel());
@@ -215,6 +220,5 @@ public class PegawaiController {
 		model.addAttribute("namaJabatan" , jabatanService.getJabatanDetailById(Long.parseLong(idJabatan)));
 		return "cari-pegawai";
 	}
-	
 	
 }
