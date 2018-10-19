@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<title>Tambah Jabatan</title>
+	
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar (pageTitle='View Pilot')"></nav>
+	<div id="Content" class="container-full-bg">
+	<h2>Tambah Jabatan Baru</h2>
+	<form class="form-horizontal" th:action="@{/jabatan/tambah}" th:object="${jabatan}" method="POST">
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="nama">Nama</label>
+    		<div class="col-sm-10">
+    		  <input type="text" class="form-control" id="nama" name="nama" th:field="*{nama}">
+    		</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="deskripsi">Deskripsi</label>
+    		<div class="col-sm-10">
+    		  <input type="text" class="form-control" id="deskripsi" name="deskripsi" th:field="*{deskripsi}">
+    		</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="gajiPokok">Gaji Pokok</label>
+    		<div class="col-sm-10">
+    		  <input type="number" class="form-control" id="gajiPokok" name="gajiPokok" th:field="*{gajiPokok}">
+    		</div>
+		</div>
+		
+		<button type="submit">Simpan</button>
+	</form>
+	</div>
+</body>
+</html>

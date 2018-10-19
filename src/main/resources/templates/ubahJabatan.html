@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<title>Update Jabatan</title>
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<div id="Content" class="container-full-bg">
+	<h2>Ubah Jabatan</h2>
+	<form th:action="@{'/jabatan/ubah/' + ${jabatan.id}}" th:object="${jabatan}" method="POST">
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="nama">Nama Jabatan</label>
+    		<div class="col-sm-10">
+    		  <input type="text" class="form-control" id="nama" name="nama" th:field="*{nama}" th:value="${jabatan.nama}">
+    		</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="deskripsi">Deskripsi</label>
+    		<div class="col-sm-10">
+    		  <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" th:field="*{deskripsi}" th:value="${jabatan.deskripsi}">
+    		</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="gajiPokok">Gaji Pokok</label>
+    		<div class="col-sm-10">
+    		  <input type="number" class="form-control" id="gajiPokok" name="gajiPokok" th:field="*{gajiPokok}" th:value="${jabatan.gajiPokok}">
+    		</div>
+		</div>
+		
+		<button type="submit">Submit</button>
+	</form>
+	
+	</div>
+</body>
+</html>

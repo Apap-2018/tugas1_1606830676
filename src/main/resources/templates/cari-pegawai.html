@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<title>Cari Pegawai</title>
+	
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+	
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   	
+	
+	
+	<script type="text/javascript">
+		$(document).ready( function () {
+	    	$('#datatable').DataTable();
+		} );
+	</script>
+	
+	<style>
+	select option[disabled] {
+    	display: none;
+	}
+	</style>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar (pageTitle='View Pilot')"></nav>
+	<div id="Content" class="container-full-bg">
+	<h1>Cari Pegawai</h1>
+	<form class="form-inline" th:action="@{/pegawai/tambah}" th:object="${pegawai}" method="POST">
+
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="provinsi">Provinsi</label>
+			<div class="col-sm-10">
+				<select type="text" name="provinsi" id="provinsi">
+					<option th:each="provinsi: ${listOfProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}" name="provinsi"></option>
+				</select>
+			</div>
+		</div> 
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="instansi">Instansi</label>
+    		<div class="col-sm-10">
+				<select type="text" name="instansi" id="instansi">
+					<option th:each="instansi: ${listOfInstansi}" th:value="${instansi.id}" th:prov="${instansi.provinsi.id}" th:text="${instansi.nama}" name="instansi"></option>
+				</select>
+    		</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="jabatan">Jabatan</label>
+    		<div class="col-sm-10">
+    			<select name="jabatan">
+					<option th:each="jabatan : ${listOfJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}" name="jabatan">
+					</option>
+				</select>
+    		</div>
+		</div>
+		
+		<button type="submit" name="cari">Cari</button>
+	</form>
+	</div>
+	
+	<table border="I">
+		<caption>Kepegawaian</caption>
+		<thead>
+			<tr>
+				<th style="text-align: center">NIP</th>
+				<th style="text-align: center">Nama</th>
+				<th style="text-align: center">Tempat Lahir</th>
+				<th style="text-align: center">Tanggal Lahir</th>
+				<th style="text-align: center">Tahun Masuk</th>
+				<th style="text-align: center">Nama Instansi</th>
+				<th style="text-align: center">Jabatan</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="pegawai,iterationStatus : *{listPegawai}">
+				<td th:text="${pegawai.nip}"></td>
+				<td th:text="${pegawai.nama}"></td>
+				<td th:text="${pegawai.tempat_lahir}"></td>
+				<td th:text="${pegawai.tanggal_lahir}"></td>
+				<td th:text="${pegawai.tahun_masuk}"></td>
+				<td th:text="${pegawai.instansi.nama}"></td>
+				<td th:text="${nama_jabatan}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
+<script>
+    $('#provinsi').on('click',function() {
+        $('#instansi').children('option').each(function(){
+            if($(this).attr('prov') !== $('#provinsi').val() ) $(this).attr('disabled', 'disabled')
+            else $(this).removeAttr('disabled')
+        }) 
+    })
+    $('#provinsi').trigger('click')
+</script>

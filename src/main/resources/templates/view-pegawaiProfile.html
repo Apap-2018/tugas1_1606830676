@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<title>Profile Pegawai</title>
+	
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar "></nav>
+	<div id="Content" class="container-full-bg">
+	<h1 th:text="'Lihat Data Pegawai - ' + ${pegawai.getNip()}"></h1>
+		<div class="card my-5">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th scope="row">NIP</th>
+						<td th:text="${pegawai.getNip()}"></td>
+					</tr>
+					<tr>
+						<th scope="row">Nama</th>
+						<td th:text="${pegawai.getNama()}"></td>
+					</tr>
+					<tr>
+						<th scope="row">Tempat Lahir</th>
+						<td th:text="${pegawai.getTempatLahir()}"></td>
+					</tr>
+					<tr>
+						<th scope="row">Tanggal Lahir</th>
+						<td th:text="${pegawai.getTanggalLahir()}"></td>
+					</tr>
+					<tr>
+						<th scope="row">Tahun Masuk</th>
+						<td th:text="${pegawai.getTahunMasuk()}"></td>
+					</tr>
+					<tr>
+						<th scope="row">Nama Instansi</th>
+						<td th:text="${pegawai.getInstansi().getNama()} + ' ' + ${pegawai.getInstansi().getProvinsi().getNama()}"></td>
+					</tr>
+					<tr>
+						<th scope="row">Jabatan</th>
+						<td>
+							<ul>
+								<li th:each="jabatan : ${pegawai.getJabatanList()}">
+									<div th:text="${jabatan.getNama()}"></div>
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+                        <th scope="row">Gaji</th>
+                        <td th:text="'Rp' + ${#numbers.formatInteger(pegawai.getGaji(), 0)}"></td>
+                    </tr>
+				</tbody>
+			</table>
+			<form th:action="@{/pegawai/ubah/} + ${pegawai.getNip()}">
+				<button value="submit">Ubah</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

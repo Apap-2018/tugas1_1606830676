@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<title>Ubah Profile Pegawai</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   	
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+	<style>
+	select option[disabled] {
+    	display: none;
+	}
+	</style>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<div id="Content" class="container-full-bg">
+	<h2>Ubah Data Pegawai</h2>
+		<form th:action="@{'/pegawai/ubah/' + ${pegawai.nip}}" th:object="${pegawai}" method="POST">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="nama">Nama Pegawai</label>
+    		<div class="col-sm-10">
+    		  <input type="text" class="form-control" id="nama" name="nama" th:field="*{nama}" th:value="${pegawai.nama}">
+    		</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="tempat_lahir">Tempat Lahir</label>
+    		<div class="col-sm-10">
+    		  <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" th:field="*{tempatLahir}" th:value="${pegawai.tempatLahir}">
+    		</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="tempat_lahir">Tanggal Lahir</label>
+    		<div class="col-sm-10">
+    		  <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" th:field="*{tanggalLahir}" th:value="${pegawai.tanggalLahir}">
+    		</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="tahun_masuk">Tahun Masuk</label>
+    		<div class="col-sm-10">
+    			<select name="tahun_masuk" th:field="*{tahunMasuk}" th:value="${pegawai.tahunMasuk}">
+					<option th:each="i : ${#numbers.sequence(1980, 2018)}" th:value="${i}" th:text="${i}">
+					</option>
+				</select>
+    		</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="provinsi">Provinsi</label>
+			<div class="col-sm-10">
+				<select name="provinsi" id="provinsi">
+					<option th:each="provinsi: ${listOfProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}" name="provinsi"></option>
+				</select>
+			</div> 
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="instansi">Instansi</label>
+    		<div class="col-sm-10">
+				<select name="instansiA" id= "instansi">
+					<option th:each="instansi: ${listOfInstansi}" th:value="${instansi.id}" th:prov="${instansi.provinsi.id}" th:text="${instansi.nama}" name="instansi"></option>
+				</select>
+    		</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="jabatan">Jabatan</label>
+    		<div class="col-sm-10">
+    			<select name="jabatan" multiple>
+					<option th:each="jabatan : ${listOfJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}" name="jabatan">
+					</option>
+				</select>
+    		</div>
+		</div>
+		
+		<button type="submit">Simpan</button>
+	</form>
+	
+	</div>
+</body>
+</html>
+<script>
+    $('#provinsi').on('click',function() {
+        $('#instansi').children('option').each(function(){
+            if($(this).attr('prov') !== $('#provinsi').val() ) $(this).attr('disabled', 'disabled')
+            else $(this).removeAttr('disabled')
+        }) 
+    })
+    $('#provinsi').trigger('click')
+</script>
