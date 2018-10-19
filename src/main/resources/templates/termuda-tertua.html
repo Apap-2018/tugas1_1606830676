@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<title>Data Pegawai Termuda Tertua</title>
+	
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar "></nav>
+	<div id="Content" class="container-full-bg">
+		<div class= "row">
+			<div class= "col">
+				<h2>Data Pegawai Termuda</h2>
+				<table>
+					<tbody>
+						<tr>
+							<td scope="row">NIP</td>
+							<td th:value="${oldest.getNip()}" th:text="${youngest.getNip()}"></td>
+						</tr>	
+						
+						<tr>
+							<td scope="row">Nama</td>
+							<td th:value="${youngest.getNama()}" th:text="${youngest.getNama()}"></td>
+						</tr>
+						
+						<tr>
+							<td scope="row">Tempat Lahir</td>
+							<td th:value="${youngest.getTempatLahir()}" th:text="${youngest.getTempatLahir()}"></td>
+						</tr>
+						
+						<tr>
+							<td scope="row">Tanggal Lahir</td>
+							<td th:value="${youngest.getTanggalLahir()}" th:text="${youngest.getTanggalLahir()}"></td>
+						</tr>
+						
+						<tr>
+							<td scope="row">Tahun Masuk</td>
+							<td th:value="${youngest.getTahunMasuk()}" th:text="${youngest.getTahunMasuk()}"></td>
+						</tr>
+						
+						<tr>
+							<td scope="row">Nama Instansi</td>
+							<td th:value="${youngest.NamaInstansi()}" th:text="${youngest.getNamaInstansi()}"></td>
+						</tr>
+						
+						<tr th:each="jabatan:${younglistJabatan}">
+							<td scope="row">Jabatan</td>
+							<td th:value="${jabatan.getNama()}" th:text="${jabatan.getNama()}"></td>
+						</tr>	
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+		<div class= "row">
+			<div class= "col">
+				<h2>Data Pegawai Tertua</h2>
+				<table>
+					<tbody>
+						<tr>
+							<td scope="row">NIP</td>
+							<td th:value="${oldest.getNip()}" th:text="${oldest.getNip()}"></td>
+						</tr>	
+						
+						<tr>
+							<td scope="row">Nama</td>
+							<td th:value="${oldest.getNama()}" th:text="${oldest.getNama()}"></td>
+						</tr>
+						
+						<tr>
+							<td scope="row">Tempat Lahir</td>
+							<td th:value="${oldest.getTempatLahir()}" th:text="${oldest.getTempatLahir()}"></td>
+						</tr>
+						
+						<tr>
+							<td scope="row">Tanggal Lahir</td>
+							<td th:value="${oldest.getTanggalLahir()}" th:text="${oldest.getTanggalLahir()}"></td>
+						</tr>
+						
+						<tr>
+							<td scope="row">Tahun Masuk</td>
+							<td th:value="${oldest.getTahunMasuk()}" th:text="${oldest.getTahunMasuk()}"></td>
+						</tr>
+						
+						<tr>
+							<td scope="row">Nama Instansi</td>
+							<td th:value="${oldest.NamaInstansi()}" th:text="${oldest.getNamaInstansi()}"></td>
+						</tr>
+						
+						<tr th:each="jabatan:${oldestlistJabatan}">
+							<td scope="row">Jabatan</td>
+							<td th:value="${jabatan.getNama()}" th:text="${jabatan.getNama()}"></td>
+						</tr>	
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+		
+</html>

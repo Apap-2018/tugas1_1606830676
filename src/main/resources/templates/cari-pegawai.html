@@ -6,18 +6,10 @@
 	
 	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
-	
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   	
-	
-	
-	<script type="text/javascript">
-		$(document).ready( function () {
-	    	$('#datatable').DataTable();
-		} );
-	</script>
+	<script src="/js/jquery-1.11.2.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 	
 	<style>
 	select option[disabled] {
@@ -30,7 +22,8 @@
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<div id="Content" class="container-full-bg">
 	<h1>Cari Pegawai</h1>
-	<form class="form-inline" th:action="@{/pegawai/tambah}" th:object="${pegawai}" method="POST">
+	<br></br>
+	<form class="form-inline" th:action="@{/pegawai/cari}" th:object="${pegawai}" method="POST">
 
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="provinsi">Provinsi:</label>
@@ -62,35 +55,39 @@
 		
 		<button type="submit" name="cari">Cari</button>
 	</form>
+	<br></br>
+	<table id="example" class="table table-striped table-bordered" style="width:100%" >
+	        <thead>
+	            <tr>
+					<th style="text-align: center">NIP</th>
+					<th style="text-align: center">Nama</th>
+					<th style="text-align: center">Tempat Lahir</th>
+					<th style="text-align: center">Tanggal Lahir</th>
+					<th style="text-align: center">Tahun Masuk</th>
+					<th style="text-align: center">Nama Instansi</th>
+					<th style="text-align: center">Jabatan</th>
+				</tr>
+	        </thead>
+	        <tbody>
+	            <tr th:each="pegawai,iterationStatus : *{listPegawai}">
+	                    <td th:text="${pegawai.nip}"></td>
+	                    <td th:text="${pegawai.nama}"></td>
+	                    <td th:text="${pegawai.tempatLahir}"></td>
+	                    <td th:text="${pegawai.tanggalLahir}"></td>
+	                    <td th:text="${pegawai.tahunMasuk}"></td>
+                    	<td th:text="${nama}"></td>
+                    	<td th:text="${namaJabatan}"></td>
+				</tr>
+	        </tbody>
+		</table>
 	</div>
-	
-	<table border="I">
-		<caption>Kepegawaian</caption>
-		<thead>
-			<tr>
-				<th style="text-align: center">NIP</th>
-				<th style="text-align: center">Nama</th>
-				<th style="text-align: center">Tempat Lahir</th>
-				<th style="text-align: center">Tanggal Lahir</th>
-				<th style="text-align: center">Tahun Masuk</th>
-				<th style="text-align: center">Nama Instansi</th>
-				<th style="text-align: center">Jabatan</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="pegawai,iterationStatus : *{listPegawai}">
-				<td th:text="${pegawai.nip}"></td>
-				<td th:text="${pegawai.nama}"></td>
-				<td th:text="${pegawai.tempat_lahir}"></td>
-				<td th:text="${pegawai.tanggal_lahir}"></td>
-				<td th:text="${pegawai.tahun_masuk}"></td>
-				<td th:text="${pegawai.instansi.nama}"></td>
-				<td th:text="${nama_jabatan}"></td>
-			</tr>
-		</tbody>
-	</table>
 </body>
 </html>
+<script type="text/javascript">
+		$(document).ready( function () {
+	    	$('#datatable').DataTable();
+		} );
+	</script>
 <script>
     $('#provinsi').on('click',function() {
         $('#instansi').children('option').each(function(){

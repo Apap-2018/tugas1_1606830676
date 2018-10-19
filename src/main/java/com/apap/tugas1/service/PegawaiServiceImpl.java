@@ -1,6 +1,8 @@
 package com.apap.tugas1.service;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -15,7 +17,11 @@ import org.springframework.stereotype.Service;
 
 import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.JabatanModel;
+import com.apap.tugas1.model.JabatanPegawaiModel;
 import com.apap.tugas1.model.PegawaiModel;
+import com.apap.tugas1.repository.InstansiDb;
+import com.apap.tugas1.repository.JabatanDb;
+import com.apap.tugas1.repository.JabatanPegawaiDb;
 import com.apap.tugas1.repository.PegawaiDb;
 
 @Service
@@ -24,6 +30,12 @@ public class PegawaiServiceImpl implements PegawaiService{
 	
 	@Autowired
 	private PegawaiDb pegawaiDb;
+	
+	@Autowired
+	private JabatanDb jabatanDb;
+	
+	@Autowired
+	private InstansiDb instansiDb;
 
 	@Override
 	public void addPegawaiBaru(PegawaiModel pegawai) {
@@ -58,11 +70,11 @@ public class PegawaiServiceImpl implements PegawaiService{
 	}
 	
 	@Override
-	public void deleteListElement(List<PegawaiModel> listPegawai, int tahunLahir) {
+	public void deleteListElement(List<PegawaiModel> listPegawai, int tglLahir) {
 		Iterator<PegawaiModel> i = listPegawai.iterator();
 		while (i.hasNext()) {
 			PegawaiModel peg = i.next();
-			if(Integer.parseInt(peg.getTahunLahir()) != tahunLahir) {
+			if(Integer.parseInt(peg.getTanggalLahirStr()) != tglLahir) {
 				i.remove();
 			} 
 		}
@@ -81,21 +93,29 @@ public class PegawaiServiceImpl implements PegawaiService{
 	}
 
 	@Override
-	public void hapusJabatanList(List<JabatanModel> listJabatan, Long id) {
-		Iterator<JabatanModel> i = listJabatan.iterator();
-		while (i.hasNext()) {
-			JabatanModel jabatan = i.next();
-			if(jabatan.getId() == id) {
-				i.remove();
-			} 
-		}
-	}
-
-	@Override
 	public List<PegawaiModel> findByInstansi(InstansiModel instansi) {
 		List<PegawaiModel> listPegawai = pegawaiDb.findAllByInstansi(instansi);
 		return listPegawai;
 	}
+	
+	
+	@Override
+	public List<PegawaiModel> getFilter(String idInstansi, String idJabatan) {
+		List<PegawaiModel> list = new ArrayList<PegawaiModel>();
+		InstansiModel instansi = instansiDb.findInstansiById(Long.parseLong(idInstansi));
+		List<PegawaiModel> listPegawai = pegawaiDb.findAllByInstansi(instansi);
+		JabatanModel jabatan = jabatanDb.findJabatanById(Long.parseLong(idJabatan));
+		for(PegawaiModel pegawai : listPegawai) {
+			for(JabatanModel jabatanA : pegawai.getJabatanList()) {
+				if(jabatanA.getId() == Long.parseLong(idJabatan)) {
+					list.add(pegawai);
+				}
+			}
+		}
+		return list;
+	}
+	
+
 	
 	@Override
 	public int findJabatanList(List<JabatanModel> listJabatan, Long id) {

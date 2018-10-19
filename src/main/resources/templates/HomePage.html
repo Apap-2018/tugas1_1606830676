@@ -57,28 +57,31 @@
 		</div>
 	</div>
 	<br></br>
+	
 	<div class="row">
 		<div class="col-md-6">
 			<div class="card">
 				<div class="card-header">
 					<h4>Lihat Pegawai Termuda dan Tertua</h4>
 				</div>
-				<form th:action="@{/pegawai/termudaTertua}" method="GET">
-			<div class="card-body">
-			
-			<label class="control-label col-sm-5">Pilih Instansi</label>
-				<div class="col-sm-10">
+				<form th:action="@{/pegawai/termuda-tertua/}" method="GET">
+					<div class="card-body">
+						<label class="control-label col-sm-5" for="idJabatan">Pilih Instansi</label>
+							<div class="col-sm-10">
 								<select name="instansi">
 									<option th:each="instansi : ${listOfInstansi}" th:value="${instansi.id}" th:text="${instansi.nama}" name="instansi">
 									</option>
 								</select>
 							</div>
-								<button type="submit" class="btn btn-primary">Lihat</button>
-							</div>
-						</div>
+							<br></br>
+						<button type="submit" class="btn btn-primary">Lihat</button>
 					</div>
-				</div>
+				</form>
 			</div>
-	<br></br>
+		</div>
+	</div>
+	<br>
+	</br>
+	</div>
 </body>
-</html>	
+</html>

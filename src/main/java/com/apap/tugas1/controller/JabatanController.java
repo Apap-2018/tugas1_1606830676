@@ -84,15 +84,10 @@ public class JabatanController {
         List<PegawaiModel> listPegawai = jabatan.getPegawaiList();
         if(listPegawai.isEmpty()) {
         	jabatanService.hapusJabatan(jabatan);
-        }
-        else {
-        	for(PegawaiModel pegawai : listPegawai) {
-        		pegawaiService.hapusJabatanList(pegawai.getJabatanList(), Long.parseLong(id_jabatan));
-        	}
-        	jabatanService.hapusJabatan(jabatan);
+        	model.addAttribute("nama", jabatan.getNama());
+        	return "hapusJabatan";
         }
         model.addAttribute("nama", jabatan.getNama());
-        return "hapusJabatan";
-    }
-	
+        return "hapusFailed";
+        }
 }

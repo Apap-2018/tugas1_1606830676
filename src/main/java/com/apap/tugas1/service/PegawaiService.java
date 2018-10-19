@@ -17,10 +17,10 @@ public interface PegawaiService {
 	PegawaiModel getPegawaiByNip(String nip);
 	List<PegawaiModel> findByTahunMasukAndInstansi(String tahunMasuk, InstansiModel instansi );
 	
-	void deleteListElement(List<PegawaiModel> listPegawai, int tahunLahir);
 	void ubahPegawai(String nip, PegawaiModel pegawai);
-	void hapusJabatanList(List<JabatanModel> listJabatan, Long id);
 	
 	List<PegawaiModel> findByInstansi(InstansiModel instansi);
 	int findJabatanList(List<JabatanModel> listJabatan, Long id);
+	List<PegawaiModel> getFilter(String idInstansi, String idJabatan);
+	void deleteListElement(List<PegawaiModel> listPegawai, int tahunLahir);
 }
