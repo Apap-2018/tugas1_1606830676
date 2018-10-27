@@ -6,6 +6,17 @@
 	
 	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+	<style>
+		.footer {
+		   position: absolute;
+		   bottom:0;
+		   color: black;
+		   width:100%;
+		   height:50px;
+		   text-align: center;
+		   font-size:12px;
+		}
+	</style>
 </head>
 
 <body>
@@ -13,3 +24,8 @@
 	<h1>Sukses!</h1>
 	<h4 th:text="'Pegawai dengan NIP ' + ${nip} + ' berhasil ditambahkan'"></h4>
 </body>
+
+	<div class="footer navbar-fixed-bottom">
+	  	<p>Sistem Informasi Kepegawaian &copy; Yesica - APAP A</p>
+	</div>
+</html>

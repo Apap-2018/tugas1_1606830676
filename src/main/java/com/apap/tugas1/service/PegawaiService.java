@@ -13,14 +13,14 @@ public interface PegawaiService {
 	void hapusPegawai (PegawaiModel pegawai);
 	void ubahPegawai (PegawaiModel pegawai);
 	
-	Optional<PegawaiModel> getPegawaiDetailById(Long id);
+	Optional<PegawaiModel> getDataPegawaiById(Long id);
 	PegawaiModel getPegawaiByNip(String nip);
-	List<PegawaiModel> findByTahunMasukAndInstansi(String tahunMasuk, InstansiModel instansi );
-	
-	void ubahPegawai(String nip, PegawaiModel pegawai);
+	List<PegawaiModel> findPegByThnMskDanInst(String tahunMasuk, InstansiModel instansi );
 	
 	List<PegawaiModel> findByInstansi(InstansiModel instansi);
-	int findJabatanList(List<JabatanModel> listJabatan, Long id);
+	int findListJabtPeg(List<JabatanModel> listJabatan, Long id);
 	List<PegawaiModel> getFilter(String idInstansi, String idJabatan);
+	
+	void ubahPegawai(String nip, PegawaiModel pegawai);
 	void deleteListElement(List<PegawaiModel> listPegawai, int tahunLahir);
 }

@@ -54,7 +54,7 @@ public class PegawaiServiceImpl implements PegawaiService{
 	}
 
 	@Override
-	public Optional<PegawaiModel> getPegawaiDetailById(Long id) {
+	public Optional<PegawaiModel> getDataPegawaiById(Long id) {
 		return pegawaiDb.findById(id);
 	}
 
@@ -65,7 +65,7 @@ public class PegawaiServiceImpl implements PegawaiService{
 	}
 
 	@Override
-	public List<PegawaiModel> findByTahunMasukAndInstansi(String tahunMasuk, InstansiModel instansi ){
+	public List<PegawaiModel> findPegByThnMskDanInst(String tahunMasuk, InstansiModel instansi ){
 		return pegawaiDb.findByTahunMasukAndInstansi(tahunMasuk, instansi);
 	}
 	
@@ -118,7 +118,7 @@ public class PegawaiServiceImpl implements PegawaiService{
 
 	
 	@Override
-	public int findJabatanList(List<JabatanModel> listJabatan, Long id) {
+	public int findListJabtPeg(List<JabatanModel> listJabatan, Long id) {
 		int ret = 0;
 		Iterator<JabatanModel> i = listJabatan.iterator();
 		while (i.hasNext()) {

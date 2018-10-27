@@ -40,27 +40,23 @@ public class JabatanController {
 		return "not-foundError";
 	}
 	
-	@RequestMapping(value = "/jabatan/viewall", method = RequestMethod.GET)
-    private String hapusJabatan(Model model) {
-		List<JabatanModel> listJabatan = jabatanService.findAllJabatan();
-        model.addAttribute("listJabatan", listJabatan);
-        return "view-all-jabatan";
-    }
 	
+	//PROSES MENAMBAH JABATAN
 	@RequestMapping(value = "/jabatan/tambah", method = RequestMethod.GET)
 	private String add(Model model) {
 		model.addAttribute("jabatan", new JabatanModel());
 		return "tambah-jabatanBaru";
 	}
 
-	
 	@RequestMapping(value = "/jabatan/tambah", method = RequestMethod.POST)
 	private String addPegawaiSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
 		jabatanService.addJabatan(jabatan);
 		model.addAttribute("nama", jabatan.getNama());
-		return "addJabatan-success";
+		return "tambahJabatan-success";
 	}
 	
+	
+	//PROSES MENGUBAH DATA JABATAN
 	@RequestMapping(value = "/jabatan/ubah/{id_jabatan}", method = RequestMethod.GET)
 	private String ubahJabatan(@PathVariable(value = "id_jabatan") String id_jabatan, Model model) {
 		JabatanModel jabatan = jabatanService.getJabatanDetailById(Long.parseLong(id_jabatan));
@@ -71,23 +67,37 @@ public class JabatanController {
 	}
 
 	@RequestMapping(value = "/jabatan/ubah/{id_jabatan}", method = RequestMethod.POST)
-	private String ubahPegawai(@ModelAttribute JabatanModel newJabatan, 
-			@PathVariable(value = "id_jabatan") String id_jabatan, Model model) {
+	private String ubahJabatan(@ModelAttribute JabatanModel newJabatan, 
+		@PathVariable(value = "id_jabatan") String id_jabatan, Model model) {
 		jabatanService.ubahJabatan(Long.parseLong(id_jabatan), newJabatan);
 		model.addAttribute("nama", newJabatan.getNama());
+		
 		return "ubahJabatan-success";
 	}
 	
+	//PROSES MENGAHUPUS DATA JABATAN
 	@RequestMapping(value = "/jabatan/hapus/{id_jabatan}", method = RequestMethod.GET)
     private String hapusJabatan(@PathVariable(value = "id_jabatan") String id_jabatan, Model model) {
         JabatanModel jabatan = jabatanService.getJabatanDetailById(Long.parseLong(id_jabatan));
         List<PegawaiModel> listPegawai = jabatan.getPegawaiList();
+        
         if(listPegawai.isEmpty()) {
         	jabatanService.hapusJabatan(jabatan);
         	model.addAttribute("nama", jabatan.getNama());
         	return "hapusJabatan";
         }
+        
         model.addAttribute("nama", jabatan.getNama());
+        
         return "hapusFailed";
         }
+	
+	//PROSES MELIHAT SEMUA JABATAN SIPEG
+	@RequestMapping(value = "/jabatan/viewall", method = RequestMethod.GET)
+    private String hapusJabatan(Model model) {
+		List<JabatanModel> listJabatan = jabatanService.findAllJabatan();
+        model.addAttribute("listJabatan", listJabatan);
+        return "view-all-jabatan";
+    }
+
 }

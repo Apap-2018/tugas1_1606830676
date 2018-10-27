@@ -6,39 +6,74 @@
 	
 	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+	
+	<style>
+		.footer {
+		   position: relative;
+		   bottom:0;
+		   color: black;
+		   width:100%;
+		   height:50px;
+		   text-align: center;
+		   font-size:12px;
+		}
+	</style>
+	
+	<style>
+		.button {
+		background-color: #008CBA;
+		font-size: 14px;
+		border: none;
+	    color: white;
+	    padding: 10px 20px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    margin: 4px 2px;
+	    cursor: pointer;
+		}
+	</style>
+	
 </head>
 
 <body>
 	<nav th:replace="fragments/fragment :: navbar "></nav>
 	<div id="Content" class="container-full-bg">
-	<h1 th:text="'Lihat Data Pegawai - ' + ${pegawai.getNip()}"></h1>
+	<h2 th:text="'Lihat Data Pegawai - ' + ${pegawai.getNip()}"></h2>
 		<div class="card my-5">
 			<table class="table">
 				<tbody>
+				
 					<tr>
 						<th scope="row">NIP</th>
 						<td th:text="${pegawai.getNip()}"></td>
 					</tr>
+					
 					<tr>
-						<th scope="row">Nama</th>
+						<th scope="row">Nama Pegawai</th>
 						<td th:text="${pegawai.getNama()}"></td>
 					</tr>
+					
 					<tr>
 						<th scope="row">Tempat Lahir</th>
 						<td th:text="${pegawai.getTempatLahir()}"></td>
 					</tr>
+					
 					<tr>
 						<th scope="row">Tanggal Lahir</th>
 						<td th:text="${pegawai.getTanggalLahir()}"></td>
 					</tr>
+					
 					<tr>
 						<th scope="row">Tahun Masuk</th>
 						<td th:text="${pegawai.getTahunMasuk()}"></td>
 					</tr>
+					
 					<tr>
 						<th scope="row">Nama Instansi</th>
 						<td th:text="${pegawai.getInstansi().getNama()} + ' ' + ${pegawai.getInstansi().getProvinsi().getNama()}"></td>
 					</tr>
+					
 					<tr>
 						<th scope="row">Jabatan</th>
 						<td>
@@ -49,16 +84,22 @@
 							</ul>
 						</td>
 					</tr>
+					
 					<tr>
                         <th scope="row">Gaji</th>
                         <td th:text="'Rp' + ${#numbers.formatInteger(pegawai.getGaji(), 0)}"></td>
                     </tr>
+                   
 				</tbody>
 			</table>
-			<form th:action="@{/pegawai/ubah/} + ${pegawai.getNip()}">
-				<button value="submit">Ubah</button>
-			</form>
+			<div class="card-body">
+				<a th:href="@{/pegawai/ubah/} + ${pegawai.getNip()}" class="btn btn-primary">Ubah</a>
+			</div>
+			
 		</div>
 	</div>
 </body>
+	<div class="footer navbar-fixed-bottom">
+	  	<p>Sistem Informasi Kepegawaian &copy; Yesica - APAP A</p>
+	</div>
 </html>

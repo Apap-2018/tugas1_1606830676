@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Sukses Ubah Pegawai</title>
-	
+	<title>400 Not found</title>
 	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+	
 	<style>
 		.footer {
 		   position: absolute;
@@ -17,15 +16,17 @@
 		   font-size:12px;
 		}
 	</style>
+
 </head>
 
 <body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
-	<h1>Sukses!</h1>
-	<h4 th:text="'Data pegawai dengan NIP ' + ${nip} + ' berhasil diubah'"></h4>
+	<h1> Maaf! </h1>
+	<h2> Data Tidak Ditemukan</h2>
 </body>
 
 	<div class="footer navbar-fixed-bottom">
 	  	<p>Sistem Informasi Kepegawaian &copy; Yesica - APAP A</p>
 	</div>
+
 </html>
